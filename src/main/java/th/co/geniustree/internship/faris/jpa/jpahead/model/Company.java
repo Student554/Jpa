@@ -1,17 +1,20 @@
 package th.co.geniustree.internship.faris.jpa.jpahead.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Company implements Serializable{
+public class Company implements Serializable {
 
     @Id
     private Integer id;
 
     private String name;
+
+    @OneToMany(cascade = CascadeType.REMOVE,orphanRemoval = true,mappedBy = "company")
+    private List<Department> departments;
 
     public Integer getId() {
         return id;

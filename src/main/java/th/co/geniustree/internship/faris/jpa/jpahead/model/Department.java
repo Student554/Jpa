@@ -1,9 +1,8 @@
 package th.co.geniustree.internship.faris.jpa.jpahead.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +12,9 @@ public class Department implements Serializable {
     private Integer id;
 
     private String name;
+
+    @OneToMany(cascade = CascadeType.REMOVE,orphanRemoval = true,mappedBy = "department")
+    private List<Employee> employees;
 
     @Override
     public boolean equals(Object o) {
