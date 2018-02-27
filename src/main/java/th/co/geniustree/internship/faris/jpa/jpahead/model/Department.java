@@ -13,7 +13,7 @@ public class Department implements Serializable {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.REMOVE,orphanRemoval = true,mappedBy = "department")
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "department")
     private List<Employee> employees;
 
     @Override
@@ -56,5 +56,4 @@ public class Department implements Serializable {
 
     @ManyToOne
     private Company company;
-
 }

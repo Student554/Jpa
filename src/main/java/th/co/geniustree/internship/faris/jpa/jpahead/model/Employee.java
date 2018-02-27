@@ -65,5 +65,4 @@ public class Employee implements Serializable {
 
     @ManyToOne
     private Department department;
-
 }

@@ -13,7 +13,7 @@ public class Company implements Serializable {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.REMOVE,orphanRemoval = true,mappedBy = "company")
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
     private List<Department> departments;
 
     public Integer getId() {

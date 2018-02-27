@@ -104,18 +104,6 @@ public class JpaMain {
         return company;
     }
 
-    private static Company getCompany(EntityManager em, int index) {
-        return em.find(Company.class, index);
-    }
-
-    private static Department getDepartment(EntityManager em, int index) {
-        return em.find(Department.class, index);
-    }
-
-    private static Employee getEmployee(EntityManager em, int index) {
-        return em.find(Employee.class, index);
-    }
-
     private static void setDepartmentToEmployee(EntityManager em, int indexDepartment, int indexEmployee) {
         Department department = getDepartment(em, indexDepartment);
         Employee employee = em.find(Employee.class, indexEmployee);
@@ -196,5 +184,17 @@ public class JpaMain {
             System.out.println();
         }
         System.out.println("---***---End---***---");
+    }
+
+    private static Company getCompany(EntityManager em, int index) {
+        return em.find(Company.class, index);
+    }
+
+    private static Department getDepartment(EntityManager em, int index) {
+        return em.find(Department.class, index);
+    }
+
+    private static Employee getEmployee(EntityManager em, int index) {
+        return em.find(Employee.class, index);
     }
 }
