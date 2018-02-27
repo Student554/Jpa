@@ -18,7 +18,7 @@ public class JpaMain {
 
             em.getTransaction().begin();
 
-            //select method
+            //Select Method
 
             em.getTransaction().commit();
 
@@ -33,6 +33,27 @@ public class JpaMain {
             emf.close();
 
         }
+    }
+
+    private static void queryEmployeeById(EntityManager em,int index) {
+        Employee employee = getEmployee(em, index);
+        System.out.println("Employee_Id : "+employee.getId());
+        System.out.println("Employee_FirstName : "+employee.getFname());
+        System.out.println("Employee_LastName : "+employee.getLname());
+        System.out.println("Department_Id : "+employee.getDepartment().getId());
+    }
+
+    private static void queryDepartmentById(EntityManager em,int index) {
+        Department department = getDepartment(em, index);
+        System.out.println("Department_Id : "+department.getId());
+        System.out.println("Department_Name : "+department.getName());
+        System.out.println("Company_Id : "+department.getCompany().getId());
+    }
+
+    private static void queryCompanyById(EntityManager em,int index) {
+        Company company = getCompany(em, index);
+        System.out.println("Company_Id : "+company.getId());
+        System.out.println("Company_Name : "+company.getName());
     }
 
     private static void addEmployee(EntityManager em, Department department, int id, String fName, String lName) {
@@ -61,42 +82,42 @@ public class JpaMain {
         return company;
     }
 
-    private static Company getCompany(EntityManager em, int i) {
-        return em.find(Company.class, i);
+    private static Company getCompany(EntityManager em, int index) {
+        return em.find(Company.class, index);
     }
 
-    private static Department getDepartment(EntityManager em, int i) {
-        return em.find(Department.class, i);
+    private static Department getDepartment(EntityManager em, int index) {
+        return em.find(Department.class, index);
     }
 
-    private static Employee getEmployee(EntityManager em, int i) {
-        return em.find(Employee.class, i);
+    private static Employee getEmployee(EntityManager em, int index) {
+        return em.find(Employee.class, index);
     }
 
-    private static void setDepartmentToEmployee(EntityManager em, int iDepartment, int iEmployee) {
-        Department department = getDepartment(em, iDepartment);
-        Employee employee = em.find(Employee.class, iEmployee);
+    private static void setDepartmentToEmployee(EntityManager em, int indexDepartment, int indexEmployee) {
+        Department department = getDepartment(em, indexDepartment);
+        Employee employee = em.find(Employee.class, indexEmployee);
         employee.setDepartment(department);
     }
 
-    private static void setCompanyToDepartment(EntityManager em, int iCompany, int iDepartment) {
-        Company company1 = getCompany(em, iCompany);
-        Department department1 = em.find(Department.class, iDepartment);
+    private static void setCompanyToDepartment(EntityManager em, int indexCompany, int indexDepartment) {
+        Company company1 = getCompany(em, indexCompany);
+        Department department1 = em.find(Department.class, indexDepartment);
         department1.setCompany(company1);
     }
 
-    private static void removeCompany(EntityManager em, int i) {
-        Company company = em.find(Company.class, i);
+    private static void removeCompany(EntityManager em, int index) {
+        Company company = em.find(Company.class, index);
         em.remove(company);
     }
 
-    private static void removeEmployee(EntityManager em, int i) {
-        Employee employee = em.find(Employee.class, i);
+    private static void removeEmployee(EntityManager em, int index) {
+        Employee employee = em.find(Employee.class, index);
         em.remove(employee);
     }
 
-    private static void removeDepartment(EntityManager em, int i) {
-        Department department = em.find(Department.class, i);
+    private static void removeDepartment(EntityManager em, int index) {
+        Department department = em.find(Department.class, index);
         em.remove(department);
     }
 
