@@ -35,28 +35,49 @@ public class JpaMain {
         }
     }
 
-    private static void queryEmployeeById(EntityManager em,int index) {
+    private static void updateEmployee(EntityManager em, int index, String FName, String LName, int depId) {
         Employee employee = getEmployee(em, index);
-        System.out.println("Employee_Id : "+employee.getId());
-        System.out.println("Employee_FirstName : "+employee.getFname());
-        System.out.println("Employee_LastName : "+employee.getLname());
-        System.out.println("Department_Id : "+employee.getDepartment().getId());
+        Department department = getDepartment(em, depId);
+        employee.setFname(FName);
+        employee.setLname(LName);
+        employee.setDepartment(department);
     }
 
-    private static void queryDepartmentById(EntityManager em,int index) {
+    private static void updateDep(EntityManager em, int index, String comName, int comId) {
         Department department = getDepartment(em, index);
-        System.out.println("Department_Id : "+department.getId());
-        System.out.println("Department_Name : "+department.getName());
-        System.out.println("Company_Id : "+department.getCompany().getId());
+        Company company = getCompany(em, comId);
+        department.setName(comName);
+        department.setCompany(company);
     }
 
-    private static void queryCompanyById(EntityManager em,int index) {
+    private static void updateCompany(EntityManager em, int index, String comName) {
         Company company = getCompany(em, index);
-        System.out.println("Company_Id : "+company.getId());
-        System.out.println("Company_Name : "+company.getName());
+        company.setName(comName);
     }
 
-    private static void addEmployee(EntityManager em, Department department, int id, String fName, String lName) {
+    private static void queryEmployeeById(EntityManager em, int index) {
+        Employee employee = getEmployee(em, index);
+        System.out.println("Employee_Id : " + employee.getId());
+        System.out.println("Employee_FirstName : " + employee.getFname());
+        System.out.println("Employee_LastName : " + employee.getLname());
+        System.out.println("Department_Id : " + employee.getDepartment().getId());
+    }
+
+    private static void queryDepartmentById(EntityManager em, int index) {
+        Department department = getDepartment(em, index);
+        System.out.println("Department_Id : " + department.getId());
+        System.out.println("Department_Name : " + department.getName());
+        System.out.println("Company_Id : " + department.getCompany().getId());
+    }
+
+    private static void queryCompanyById(EntityManager em, int index) {
+        Company company = getCompany(em, index);
+        System.out.println("Company_Id : " + company.getId());
+        System.out.println("Company_Name : " + company.getName());
+    }
+
+    private static void addEmployee(EntityManager em, int indexDepartment, int id, String fName, String lName) {
+        Department department = getDepartment(em, indexDepartment);
         Employee employee = new Employee();
         employee.setId(id);
         employee.setFname(fName);
@@ -65,7 +86,8 @@ public class JpaMain {
         em.persist(employee);
     }
 
-    private static Department addDepartment(EntityManager em, Company company, int id, String name) {
+    private static Department addDepartment(EntityManager em, int indexCompany, int id, String name) {
+        Company company = getCompany(em, indexCompany);
         Department department = new Department();
         department.setId(id);
         department.setName(name);
